@@ -93,14 +93,12 @@
 
 <script>
 
-
-import AddressModal from "@/components/AddressModal";
 import axios from 'axios';
 import CharacterDetail from "@/components/CharacterDetail";
 
 export default {
   name: "Home",
-  components: {CharacterDetail, AddressModal},
+  components: {CharacterDetail},
   async mounted() {
     await this.getData();
   },
