@@ -1,9 +1,13 @@
 <template>
+
   <div class="text-center">
-    <v-dialog v-model="dialog" max-width="800">
+
+    <v-dialog v-model="dialog" max-width="600">
+
       <template v-slot:activator="{ on, attrs }">
+
         <v-btn
-            color="#ff0033"
+            color="#34495E"
             rounded
             dark
             v-bind="attrs"
@@ -18,41 +22,42 @@
         </v-btn>
       </template>
 
-      <v-card>
-        <v-card-title class="c-green">
+      <v-card class="c-blue">
+
+        <v-card-title>
           <h2 class="text-white">{{ this.character.name }}</h2>
         </v-card-title>
 
         <v-card-text>
 
-          <div class="text-center mt-4">
-            <img :src="this.character.image" :alt="this.character.name">
+          <div class="text-center my-2">
+            <img :src="this.character.image" :alt="this.character.name" class="w-100">
           </div>
 
           <v-stepper v-model="e6" vertical>
 
-            <v-stepper-step step="1" @click="e6 = 1" color="#263B2B">
+            <v-stepper-step step="1" @click="e6 = 1" color="#4D4D81">
               Character
             </v-stepper-step>
 
             <v-stepper-content step="1">
-              <v-card color="#263B2B" class="p-3">
-                <p class="text-white">Name: <b>{{ character.name }}</b></p>
-                <p class="text-white">Gender: <b>{{ character.gender }}</b></p>
-                <p class="text-white">Specie: <b>{{ character.species }}</b></p>
-                <p class="text-white">Status: <b>{{ character.status }}</b></p>
+              <v-card color="" class="p-3">
+                <p class="text-black">Name: <br> <b class="c-red">{{ character.name }}</b></p>
+                <p class="text-black">Gender: <br> <b class="c-red">{{ character.gender }}</b></p>
+                <p class="text-black">Specie: <br> <b class="c-red">{{ character.species }}</b></p>
+                <p class="text-black">Status: <br> <b class="c-red">{{ character.status }}</b></p>
               </v-card>
             </v-stepper-content>
 
-            <v-stepper-step step="2" @click="e6 = 2" color="#263B2B">
+            <v-stepper-step step="2" @click="e6 = 2" color="#4D4D81">
               Location
             </v-stepper-step>
 
             <v-stepper-content step="2">
-              <v-card color="#263B2B" class="p-3">
-                <p class="text-white">Name: <b>{{ location.name }}</b></p>
-                <p class="text-white">Dimension: <b>{{ location.dimension }}</b></p>
-                <p class="text-white">Type: <b>{{ location.type }}</b></p>
+              <v-card class="p-3">
+                <p class="text-black">Name: <br> <b class="c-red">{{ location.name }}</b></p>
+                <p class="text-black">Dimension: <br> <b class="c-red">{{ location.dimension }}</b></p>
+                <p class="text-black">Type: <br> <b class="c-red">{{ location.type }}</b></p>
               </v-card>
 
             </v-stepper-content>
@@ -66,7 +71,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-              color="#263B2B"
+              color="#fff"
               text
               @click="dialog = false"
           >
@@ -74,8 +79,11 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+
     </v-dialog>
+
   </div>
+
 </template>
 
 <script>
@@ -155,8 +163,19 @@ export default {
 
 <style scoped>
 
-.c-green {
-  background-color: #263B2B !important;
+.c-blue {
+  background-color: #4D4D81 !important;
+}
+
+.c-red {
+  color: #C70039;
+}
+
+@media (min-width: 575px){
+  p br
+  {
+    display: none;
+  }
 }
 
 </style>

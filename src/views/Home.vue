@@ -1,11 +1,11 @@
 <template>
 
-  <div class="container">
+  <div class="container-fluid bg-container">
 
     <div class="text-center">
       <v-container>
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="10">
             <v-container class="max-width">
               <v-pagination
                   v-model="page"
@@ -20,41 +20,35 @@
 
     <div class="row">
 
-      <div class="col-12 col-sm-4 my-5" v-for="(item,index) of characters" :key="index">
+      <div class="col-12 col-sm-4 my-5 d-flex justify-content-center align-items-stretch"
+           v-for="(item,index) of characters" :key="index">
 
-        <v-card :loading="loading">
+        <v-card class="card-round" min-width="200" max-width="350">
 
-          <template slot="progress">
-            <v-progress-linear
-                color="deep-purple"
-                height="10"
-                indeterminate
-            ></v-progress-linear>
-          </template>
-
-          <v-img :src="item.image"/>
+          <v-img :src="item.image" class="p-image"/>
 
           <v-card-title>{{ item.name }}</v-card-title>
 
           <v-card-text>
-            <v-chip-group
-                v-model="selection"
-                active-class=""
-                column
-            >
 
-              <v-chip :class="item.gender === 'Male' ? 'c-blue' : ( item.gender === 'Female' ? 'c-pink':'c-purple')"
-                      class="text-white">
-                {{ item.gender }}
+            <v-chip-group column>
+
+              <v-chip
+                  class="col-12 col-sm-8 col-lg-5 mx-sm-auto mx-lg-0 text-white"
+                  :class="item.gender === 'Male' ? 'c-blue' : (item.gender === 'Female' ? 'c-pink':'c-purple')">
+                <b>Gender: </b> {{ item.gender }}
               </v-chip>
 
-              <v-chip :class="item.gender === 'Human' ? 'c1' : 'c2'" class="text-white">
-                {{ item.species }}
+              <v-chip
+                  class="col-12 col-sm-8 col-lg-5 mx-sm-auto mx-lg-0 text-white"
+                  :class="item.gender === 'Human' ? 'c1' : 'c2'">
+                <b>Specie: </b> {{ item.species }}
               </v-chip>
 
-              <v-chip :class="item.status === 'Alive' ? 'c-green' : (item.status === 'Dead') ? 'c-red' : 'c-purple'"
-                      class="text-white">
-                {{ item.status }}
+              <v-chip
+                  class="col-12 col-sm-8 col-lg-5 mx-sm-auto mx-lg-0 text-white"
+                  :class="item.status === 'Alive' ? 'c-green' : (item.status === 'Dead') ? 'c-red' : 'c-purple'">
+                <b>Status: </b> {{ item.status }}
               </v-chip>
 
             </v-chip-group>
@@ -62,9 +56,10 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <character-detail :url="item.url" :url-location="item.location"/>
           </v-card-actions>
+
         </v-card>
 
       </div>
@@ -74,7 +69,7 @@
     <div class="text-center">
       <v-container>
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="10">
             <v-container class="max-width">
               <v-pagination
                   v-model="page"
@@ -104,23 +99,13 @@ export default {
   },
   data: () => ({
 
-    loading: false,
-    selection: 1,
     page: 1,
-
     length: 0,
 
-    characters: [],
-
+    characters: []
   }),
   methods:
       {
-        reserve() {
-          this.loading = true
-
-          setTimeout(() => (this.loading = false), 2000)
-        },
-
         async getData() {
 
           this.characters = []
@@ -128,6 +113,7 @@ export default {
           await axios.get(`https://rickandmortyapi.com/api/character/?page=${this.page}`).then((response) => {
 
             this.length = response.data.info.pages
+
             let data = response.data.results
 
             data.forEach((item) => {
@@ -145,30 +131,40 @@ export default {
                   }
 
               this.characters.push(character);
-
             });
 
           });
 
         }
+
       },
   watch:
       {
-        page: function dialog(value) {
+        page: function dialog() {
           this.getData()
-        },
+        }
       }
 }
 </script>
 
 <style scoped>
 
-.container {
-  background-color: darkslategray;
+.bg-container {
+  background: linear-gradient(to right, #17202A, #1C2833, #212F3D, #283747, #000);
 }
 
+.card-round {
+  border-radius: 1rem
+}
+
+.p-image {
+  max-height: 300px;
+}
+
+/*Colors*/
+
 .c-pink {
-  background: #EE587B !important;
+  background: #BE74B5 !important;
 }
 
 .c-blue {
@@ -180,7 +176,7 @@ export default {
 }
 
 .c-red {
-  background-color: #FC210D !important;
+  background-color: #C70039 !important;
 }
 
 .c-purple {
