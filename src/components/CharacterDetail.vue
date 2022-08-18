@@ -15,10 +15,10 @@
             x-small
             v-on:click="getData"
         >
-          <v-icon dark x-small>
-            mdi-eye
-          </v-icon>
-          Show more
+          <v-icon dark x-small>mdi-eye</v-icon>
+          <div v-if="version==='v1'">
+            Show more
+          </div>
         </v-btn>
       </template>
 
@@ -93,6 +93,7 @@ export default {
   name: "CharacterDetail",
   props:
       {
+        version: {value: String, default: 'v1'},
         url: '',
         urlLocation: ''
       },
@@ -171,9 +172,8 @@ export default {
   color: #C70039;
 }
 
-@media (min-width: 575px){
-  p br
-  {
+@media (min-width: 575px) {
+  p br {
     display: none;
   }
 }

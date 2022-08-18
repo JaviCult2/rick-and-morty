@@ -2,6 +2,8 @@
 
   <div class="container-fluid bg-container">
 
+    <search/>
+
     <div class="text-center">
       <v-container>
         <v-row justify="center">
@@ -90,10 +92,11 @@
 
 import axios from 'axios';
 import CharacterDetail from "@/components/CharacterDetail";
+import Search from "@/components/Search";
 
 export default {
   name: "Home",
-  components: {CharacterDetail},
+  components: {Search, CharacterDetail},
   async mounted() {
     await this.getData();
   },
